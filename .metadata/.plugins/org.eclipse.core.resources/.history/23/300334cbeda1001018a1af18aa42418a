@@ -1,0 +1,130 @@
+package com.hrs.userService.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hrs.userService.dto.HotelResponseDTO;
+import com.hrs.userService.dto.RatingResponseDTO;
+import com.hrs.userService.dto.UserRequestDTO;
+import com.hrs.userService.dto.UserResponseDTO;
+import com.hrs.userService.entity.User;
+import com.hrs.userService.exception.UserNotFoundException;
+import com.hrs.userService.repo.UserRepo;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepo repo;
+
+	@Autowired
+	private ModelMapper mapper;
+
+	@Autowired
+	private InterServiceCallToGetRatingDetails getRatingDetails;
+
+	@Autowired
+	private InterServiceCallToGetHotelDetails getHotelDetails;
+
+	@Override
+	public UserResponseDTO saveUser(UserRequestDTO requestDTO) {
+
+		User user = mapper.map(requestDTO, User.class);
+
+		User saveUser = repo.save(user);
+
+		UserResponseDTO responseDTO = mapper.map(saveUser, UserResponseDTO.class);
+		return responseDTO;
+
+	}
+
+	@Override
+	public List<UserResponseDTO> getAllUser() {
+
+		List<User> list = repo.findAll();
+
+		List<UserResponseDTO> responseDTO = list.stream().map(user -> mapper.map(user, UserResponseDTO.class))
+				.collect(Collectors.toList());
+
+		list.stream().forEach(user -> {
+
+			List<RatingResponseDTO> ratingDetails = getRatingDetails.getRatingByUserId(user.getUserId());
+
+			responseDTO.stream().forEach(userDTO -> userDTO.setRatingDetails(ratingDetails));
+
+			System.out.println("responseDTO after setting rating details: " + responseDTO);
+
+			ratingDetails.stream().forEach(rating -> {
+
+				HotelResponseDTO hotelDetails = getHotelDetails.getHotelById(rating.getUserId());
+
+			});
+		});
+
+		return responseDTO;
+
+	}
+
+	@Override
+	public UserResponseDTO getUserById(Integer userId) {
+		User user = repo.findById(userId)
+				.orElseThrow(() -> new UserNotFoundException("user not found against userId..!!"));
+
+		UserResponseDTO responseDTO = mapper.map(user, UserResponseDTO.class);
+
+		System.out.println("User Details: " + user);
+
+		// getting rating details:
+
+		List<RatingResponseDTO> ratingDetails = getRatingDetails.getRatingByUserId(user.getUserId());
+
+		System.out.println("Rating details: " + ratingDetails);
+
+		// getting hotelIds from rating details:
+
+		List<Integer> hotelIds = ratingDetails.stream().map(RatingResponseDTO::getHotelId).collect(Collectors.toList());
+
+		System.out.println("Hotel Ids for fetching hotel details: " + hotelIds);
+
+		// getting all hotel details from hotel Ids:
+
+		List<HotelResponseDTO> hotelDetails = new ArrayList<HotelResponseDTO>();
+
+		for (Integer hotelId : hotelIds) {
+
+			HotelResponseDTO hotelDetailsDTO = getHotelDetails.getHotelById(hotelId);
+
+			hotelDetails.add(hotelDetailsDTO);
+		}
+
+		System.out.println("Hotel Details: " + hotelDetails);
+
+		// setting hotel details in response DTO
+
+		responseDTO.setHotelDetails(hotelDetails);
+
+		// setting rating details in response DTO
+
+		responseDTO.setRatingDetails(ratingDetails);
+
+		System.out.println("Response Build successfully: " + responseDTO);
+
+		return responseDTO;
+	}
+
+	@Override
+	public void deleteUserById(Integer userId) {
+
+		User user = repo.findById(userId)
+				.orElseThrow(() -> new UserNotFoundException("user not found against userId..!!"));
+
+		repo.delete(user);
+
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.hrs.userService.service;
+
+public interface InterServiceCallToGetHotelDetails {
+
+}

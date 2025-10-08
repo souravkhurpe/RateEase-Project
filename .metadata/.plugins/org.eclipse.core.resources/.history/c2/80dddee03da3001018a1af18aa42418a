@@ -1,0 +1,9 @@
+package com.hrs.userService.service;
+
+import com.hrs.userService.dto.SignUpRequestDTO;
+
+public interface AuthService {
+
+	void signUp(SignUpRequestDTO requestDTO);
+
+}

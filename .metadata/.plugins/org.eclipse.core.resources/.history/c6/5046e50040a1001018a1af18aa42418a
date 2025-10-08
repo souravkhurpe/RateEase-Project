@@ -1,0 +1,5 @@
+package com.hrs.userService.dto;
+
+public class RatingResponseDTO {
+
+}

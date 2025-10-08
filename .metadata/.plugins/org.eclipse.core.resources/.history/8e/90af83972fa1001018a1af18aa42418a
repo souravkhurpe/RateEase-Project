@@ -1,0 +1,44 @@
+package com.hrs.ratingService.entity;
+
+import java.time.LocalDateTime;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "rating_tbl")
+public class Rating {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer ratingId;
+
+	private Integer userId;
+
+	private Integer hotelId;
+
+	private int rating;
+
+	private String feedback;
+	@CreationTimestamp
+	private LocalDateTime creationDate;
+	@UpdateTimestamp
+	private LocalDateTime updationDate;
+}

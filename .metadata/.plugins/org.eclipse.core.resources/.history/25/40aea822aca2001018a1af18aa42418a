@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: Config_Server
+
+server:
+  port: 1011
+
+
+      

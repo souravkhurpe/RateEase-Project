@@ -1,0 +1,43 @@
+package com.hrs.userService.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hrs.userService.dto.SignInRequestDTO;
+import com.hrs.userService.dto.SignInResponseDTO;
+import com.hrs.userService.dto.SignUpRequestDTO;
+
+import com.hrs.userService.service.AuthService;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+	@Autowired
+	private AuthService service;
+
+	@PostMapping("/signUp")
+	public ResponseEntity<?> signUp(@RequestBody SignUpRequestDTO requestDTO) {
+
+		System.out.println(requestDTO);
+		String response = service.signUp(requestDTO);
+
+		return new ResponseEntity(response, HttpStatus.OK);
+
+	}
+
+	@GetMapping("/signIn")
+	public ResponseEntity<?> signIn(@RequestBody SignInRequestDTO requestDTO) {
+
+		SignInResponseDTO responseDTO = service.signIn(requestDTO);
+
+		return new ResponseEntity(responseDTO, HttpStatus.OK);
+
+	}
+}

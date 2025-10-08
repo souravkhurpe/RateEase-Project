@@ -1,0 +1,10 @@
+package com.hrs.userService.repo;
+
+import org.springframework.stereotype.Service;
+
+import com.hrs.userService.service.UserService;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+}

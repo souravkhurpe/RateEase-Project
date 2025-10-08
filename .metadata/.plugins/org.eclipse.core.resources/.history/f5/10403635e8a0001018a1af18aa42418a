@@ -1,0 +1,5 @@
+package com.hrs.userService.controller;
+
+public class UserController {
+
+}

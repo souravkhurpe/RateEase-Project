@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: Hotel_Review_System_Rating_Service

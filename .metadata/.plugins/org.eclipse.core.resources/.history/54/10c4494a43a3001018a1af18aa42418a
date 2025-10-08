@@ -1,0 +1,59 @@
+package com.hrs.userService.entity;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.hrs.userService.Enum.Role;
+
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@Table(name = "user_tbl")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+public class User {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer userId;
+
+	private String userName;
+
+	private String userEmail;
+
+	private LocalDate userDob;
+
+	private String userInfo;
+
+	private String userPassword;
+
+	@Enumerated(EnumType.STRING)
+	private Role role;
+
+	@CreationTimestamp
+	private LocalDateTime creationDate;
+
+	@UpdateTimestamp
+	private LocalDateTime updateDate;
+
+}

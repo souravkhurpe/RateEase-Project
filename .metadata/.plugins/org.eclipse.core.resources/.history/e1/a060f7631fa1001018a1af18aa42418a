@@ -1,0 +1,9 @@
+package com.hrs.userService.service;
+
+import com.hrs.userService.dto.UserRequestDTO;
+
+public interface UserService {
+
+	void saveUser(UserRequestDTO requestDTO);
+
+}

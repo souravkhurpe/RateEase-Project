@@ -1,0 +1,10 @@
+package com.hrs.hotelService.service;
+
+import com.hrs.hotelService.dto.HotelRequestDTO;
+import com.hrs.hotelService.dto.HotelResponseDTO;
+
+public interface HotelService {
+
+	HotelResponseDTO saveHotel(HotelRequestDTO requestDTO);
+
+}

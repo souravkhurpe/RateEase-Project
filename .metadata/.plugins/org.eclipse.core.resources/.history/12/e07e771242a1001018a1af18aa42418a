@@ -1,0 +1,9 @@
+package com.hrs.userService.service;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient("HotelService")
+public interface InterServiceCallToGetHotelDetails {
+
+	public abstract 
+}

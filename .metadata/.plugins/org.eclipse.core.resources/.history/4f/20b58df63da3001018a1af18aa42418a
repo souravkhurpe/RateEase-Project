@@ -1,0 +1,29 @@
+package com.hrs.userService.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hrs.userService.dto.SignUpRequestDTO;
+import com.hrs.userService.service.AuthService;
+
+@RestController
+public class AuthController {
+
+	
+	@Autowired
+	private AuthService service;
+	
+	@GetMapping("/signUp")
+	public void signUp(@RequestBody SignUpRequestDTO requestDTO) {
+		
+		service.signUp(requestDTO);
+
+	}
+
+	@GetMapping("/signIn")
+	public void signIn() {
+
+	}
+}

@@ -1,0 +1,58 @@
+package com.hrs.userService.service;
+
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
+
+import com.hrs.userService.Enum.Role;
+import com.hrs.userService.dto.SignUpRequestDTO;
+import com.hrs.userService.dto.SignUpResponseDTO;
+import com.hrs.userService.entity.User;
+import com.hrs.userService.exception.UserAlreadyExistException;
+import com.hrs.userService.repo.AuthRepo;
+
+@Service
+public class AuthServiceIMPL implements AuthService {
+
+	@Autowired
+	private AuthRepo repo;
+
+	@Autowired
+	private ModelMapper mapper;
+
+	@Autowired
+	private PasswordEncoder encoder;
+
+	@Override
+	public String signUp(SignUpRequestDTO requestDTO) {
+
+		Optional<User> optionalUser = Optional.ofNullable(repo.findByUserEmail(requestDTO.getUserEmail()));
+
+		String response = "";
+		if (!optionalUser.isPresent()) {
+
+			User user = mapper.map(requestDTO, User.class);
+
+			user.setUserPassword(encoder.encode(requestDTO.getUserPassword()).toString());
+
+			user.setRole(Role.USER);
+
+			User saveUser = repo.save(user);
+
+			response = response + "User register successfully...!!";
+
+		} else {
+
+			throw new UserAlreadyExistException("User already present with provided email, use other email to signUP");
+		}
+
+		return response;
+
+	}
+
+}

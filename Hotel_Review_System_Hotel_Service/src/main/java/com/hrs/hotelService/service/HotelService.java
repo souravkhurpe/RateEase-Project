@@ -1,0 +1,18 @@
+package com.hrs.hotelService.service;
+
+import java.util.List;
+
+import com.hrs.hotelService.dto.HotelRequestDTO;
+import com.hrs.hotelService.dto.HotelResponseDTO;
+
+public interface HotelService {
+
+	HotelResponseDTO saveHotel(HotelRequestDTO requestDTO);
+
+	List<HotelResponseDTO> getAllHotel();
+
+	HotelResponseDTO getHotelById(Integer hotelId);
+
+	void deleteHotelById(Integer hotelId);
+
+}

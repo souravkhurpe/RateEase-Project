@@ -1,0 +1,5 @@
+package com.hrs.ratingService.exception;
+
+public class RatingNotFoundException {
+
+}

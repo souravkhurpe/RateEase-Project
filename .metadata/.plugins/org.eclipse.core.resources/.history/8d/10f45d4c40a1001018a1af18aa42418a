@@ -1,0 +1,68 @@
+package com.hrs.userService.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hrs.userService.dto.UserRequestDTO;
+import com.hrs.userService.dto.UserResponseDTO;
+import com.hrs.userService.entity.User;
+import com.hrs.userService.exception.UserNotFoundException;
+import com.hrs.userService.repo.UserRepo;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepo repo;
+
+	@Autowired
+	private ModelMapper mapper;
+
+	@Override
+	public UserResponseDTO saveUser(UserRequestDTO requestDTO) {
+
+		User user = mapper.map(requestDTO, User.class);
+
+		User saveUser = repo.save(user);
+
+		UserResponseDTO responseDTO = mapper.map(saveUser, UserResponseDTO.class);
+		return responseDTO;
+
+	}
+
+	@Override
+	public List<UserResponseDTO> getAllUser() {
+
+		List<User> list = repo.findAll();
+
+		List<UserResponseDTO> responseDTO = list.stream().map(user -> mapper.map(user, UserResponseDTO.class))
+				.collect(Collectors.toList());
+
+		return responseDTO;
+
+	}
+
+	@Override
+	public UserResponseDTO getUserById(Integer userId) {
+		User user = repo.findById(userId)
+				.orElseThrow(() -> new UserNotFoundException("user not found against userId..!!"));
+
+		UserResponseDTO responseDTO = mapper.map(user, UserResponseDTO.class);
+		return responseDTO;
+	}
+
+	@Override
+	public void deleteUserById(Integer userId) {
+
+		User user = repo.findById(userId)
+				.orElseThrow(() -> new UserNotFoundException("user not found against userId..!!"));
+
+		repo.delete(user);
+
+	}
+
+}

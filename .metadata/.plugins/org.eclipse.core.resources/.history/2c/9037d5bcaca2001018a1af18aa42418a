@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Config_Server
+  cloud:
+    server:
+      git:
+        uri: https://github.com/souravkhurpe/Rating-Portal-Config-Server-Microservice/tree/main
+        clone-on-start: true
+server:
+  port: 1011

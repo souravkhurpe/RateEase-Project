@@ -1,0 +1,29 @@
+package com.hrs.userService.repo;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hrs.userService.dto.UserRequestDTO;
+import com.hrs.userService.entity.User;
+import com.hrs.userService.service.UserService;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepo repo;
+
+	@Autowired
+	private ModelMapper mapper;
+
+	@Override
+	public void saveUser(UserRequestDTO requestDTO) {
+
+		User user = mapper.map(requestDTO, User.class);
+
+		User saveUser = repo.save(user);
+
+	}
+
+}

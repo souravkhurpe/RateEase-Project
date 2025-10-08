@@ -1,0 +1,20 @@
+package com.hrs.ratingService.service;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hrs.ratingService.repo.RatingRepo;
+
+@Service
+public class RatingServiceImpl implements RatingService {
+
+	
+	@Autowired
+	private RatingRepo repo;
+	
+	@Autowired
+	private ModelMapper mapper;
+	
+	
+}

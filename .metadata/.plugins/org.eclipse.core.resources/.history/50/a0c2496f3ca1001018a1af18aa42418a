@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Hotel_Review_System_Service_Registry_Server
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  instance:
+    hostname: localhost

@@ -1,0 +1,18 @@
+package com.hrs.userService.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class AuthController {
+
+	@GetMapping("/signUp")
+	public void signUp() {
+
+	}
+
+	@GetMapping("/signIn")
+	public void signIn() {
+
+	}
+}

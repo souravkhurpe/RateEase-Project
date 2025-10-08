@@ -1,0 +1,5 @@
+package com.hrs.hotelService.entity;
+
+public class Hotel {
+
+}

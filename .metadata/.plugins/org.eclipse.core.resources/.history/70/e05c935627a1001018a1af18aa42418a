@@ -1,0 +1,5 @@
+package com.hrs.hotelService.exception;
+
+public class HotelNotFoundException {
+
+}

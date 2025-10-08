@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: API_Gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      routes:
+      - id: UserService
+        uri: lb://UserService
+        predicates:
+        - Path=/user/**
+      - id: RatingService
+        uri: lb://RatingService
+        predicates:
+        - Path=/rating/**
+      - id: hotel-service
+        uri: lb://hotel-service
+        predicates:
+        - Path=/hotel/**
+  config:
+    import: configserver:http://localhost:1011
+server:
+  port: 1010

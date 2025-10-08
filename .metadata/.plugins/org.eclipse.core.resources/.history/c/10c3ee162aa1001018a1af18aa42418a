@@ -1,0 +1,5 @@
+package com.hrs.ratingService.controller;
+
+public class RatingService {
+
+}

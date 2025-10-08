@@ -1,0 +1,10 @@
+package com.hrs.ratingService.service;
+
+import com.hrs.ratingService.dto.RatingRequestDTO;
+import com.hrs.ratingService.dto.RatingResponseDTO;
+
+public interface RatingService {
+
+	RatingResponseDTO saveRating(RatingRequestDTO requestDTO);
+
+}

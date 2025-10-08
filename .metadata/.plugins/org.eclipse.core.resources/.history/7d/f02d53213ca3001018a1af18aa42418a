@@ -1,0 +1,14 @@
+package com.hrs.userService.dto;
+
+import java.time.LocalDate;
+
+public class SignUpRequestDTO {
+
+	private String userName;
+
+	private String userEmail;
+
+	private LocalDate userDob;
+
+	private String userInfo;
+}

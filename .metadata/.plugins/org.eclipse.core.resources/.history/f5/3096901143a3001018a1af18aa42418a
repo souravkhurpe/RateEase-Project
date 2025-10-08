@@ -1,0 +1,5 @@
+package com.hrs.userService.security;
+
+public interface CustomeUserDetails {
+
+}

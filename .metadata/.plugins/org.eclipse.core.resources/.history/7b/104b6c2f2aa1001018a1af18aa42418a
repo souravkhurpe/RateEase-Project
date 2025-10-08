@@ -1,0 +1,5 @@
+package com.hrs.ratingService.service;
+
+public class RatingServiceImpl {
+
+}

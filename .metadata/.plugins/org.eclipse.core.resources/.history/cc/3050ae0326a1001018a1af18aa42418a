@@ -1,0 +1,5 @@
+package com.hrs.hotelService.dto;
+
+public class HotelRequestDTO {
+
+}

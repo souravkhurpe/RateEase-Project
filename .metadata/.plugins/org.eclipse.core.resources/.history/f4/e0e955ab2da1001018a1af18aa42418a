@@ -1,0 +1,18 @@
+package com.hrs.ratingService.service;
+
+import java.util.List;
+
+import com.hrs.ratingService.dto.RatingRequestDTO;
+import com.hrs.ratingService.dto.RatingResponseDTO;
+
+public interface RatingService {
+
+	RatingResponseDTO saveRating(RatingRequestDTO requestDTO);
+
+	List<RatingResponseDTO> getAllRating();
+
+	RatingResponseDTO getRatingByUserId(Integer userId);
+
+	RatingResponseDTO getRatingByHotelId(Integer hotelId);
+
+}

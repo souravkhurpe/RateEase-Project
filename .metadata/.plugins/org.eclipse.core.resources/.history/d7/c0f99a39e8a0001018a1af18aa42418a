@@ -1,0 +1,18 @@
+package com.hrs.userService.controller;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hrs.userService.dto.UserRequestDTO;
+
+@RestController
+@RequestMapping("user")
+public class UserController {
+
+	@PostMapping()
+	public void addUser(@RequestBody UserRequestDTO requestDTO) {
+
+	}
+}

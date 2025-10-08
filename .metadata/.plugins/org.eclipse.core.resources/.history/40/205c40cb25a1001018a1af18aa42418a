@@ -1,0 +1,5 @@
+package com.hrs.hotelService.controller;
+
+public class HotelController {
+
+}

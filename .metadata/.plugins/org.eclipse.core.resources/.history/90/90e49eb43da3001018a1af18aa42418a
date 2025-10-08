@@ -1,0 +1,15 @@
+package com.hrs.userService.service;
+
+import org.springframework.stereotype.Service;
+
+import com.hrs.userService.dto.SignUpRequestDTO;
+
+@Service
+public class AuthServiceIMPL implements AuthService {
+
+	@Override
+	public void signUp(SignUpRequestDTO requestDTO) {
+
+	}
+
+}

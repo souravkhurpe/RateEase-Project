@@ -1,0 +1,14 @@
+package com.hrs.userService.service;
+
+import java.util.List;
+
+import com.hrs.userService.dto.UserRequestDTO;
+import com.hrs.userService.dto.UserResponseDTO;
+
+public interface UserService {
+
+	UserResponseDTO saveUser(UserRequestDTO requestDTO);
+
+	List<UserResponseDTO> getAllUser();
+
+}
